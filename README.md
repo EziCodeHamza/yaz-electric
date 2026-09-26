@@ -34,7 +34,7 @@ step, no backend. Deploys on Vercel with zero configuration.
 3. Framework preset: **Other**. Build command: leave empty. Output directory: leave empty.
 4. Deploy, then attach your custom domain in **Settings → Domains**.
 
-Nothing else is required — the site is fully static and needs no environment variables.
+The contact form uses a Vercel serverless function at `/api/contact.js` integrated with Resend. Configure `RESEND_API_KEY` in Vercel environment variables.
 
 ## ⚠ Before you go live — the one-line swaps
 
@@ -45,7 +45,7 @@ Everything below is a placeholder the client must replace. Each is marked with a
 |---|---|---|
 | **Phone number** | All HTML files (search `234 5678`) | `01 234 5678` → real number, both display text and `tel:+353…` |
 | **Email addresses** | All HTML files (search `yazelectrical.ie`) | `info@yazelectrical.ie`, `careers@yazelectrical.ie` |
-| **Form endpoint** | `contact.html` `action` **and** `FORMSPREE_ENDPOINT` in `js/main.js` | Create a free form at formspree.io → paste `https://formspree.io/f/XXXXXX` in both places |
+| **Resend API Key** | Vercel Project Settings → Environment Variables | Set `RESEND_API_KEY` to your Resend API key |
 | **Domain** | `rel="canonical"`, Open Graph URLs, JSON-LD schema, `sitemap.xml`, `robots.txt` (search `yazelectrical.ie` / `UPDATE DOMAIN`) | `https://www.yazelectrical.ie` → real domain |
 | **Safe Electric number** | Optional — add the registration number to the About page / footer when known | — |
 

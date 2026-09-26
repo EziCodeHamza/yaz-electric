@@ -120,13 +120,7 @@
             </div>
           </div>
 
-          <!--
-            FORMSPREE: replace action below with your form URL, e.g.
-            <form id="quote-form" action="https://formspree.io/f/XXXXXX" ...>
-            Also update FORMSPREE_ENDPOINT in js/main.js with the same URL.
-          -->
-          <form id="quote-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <form id="quote-form" method="POST">
             <div class="form-stack">
               <div class="field">
                 <label for="f-name">Your name</label>
@@ -159,7 +153,7 @@
                 <textarea id="f-message" name="message" required placeholder="What's involved, where are you based, and when suits you? The more detail, the quicker we can help."></textarea>
                 <span class="field__error">A few words about the job helps us quote accurately.</span>
               </div>
-              <p id="form-error" class="form-error">Something went wrong sending your message. Please try again.</p>
+              <div id="form-status-msg" class="form-status-msg" aria-live="polite" role="status"></div>
               <button class="btn btn--primary btn--lg btn--block" type="submit">Send quote request</button>
               <p class="form-note">We only use your details to answer your enquiry — no newsletters, no sharing.</p>
             </div>

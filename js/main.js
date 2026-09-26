@@ -5,14 +5,6 @@
 (function () {
   'use strict';
 
-  /* ----------------------------------------------------------
-     ONE-LINE SWAP: your Formspree endpoint goes here.
-     Create a free form at https://formspree.io, then paste the
-     "https://formspree.io/f/XXXXXX" URL below — and in the
-     `action` attribute of the form on contact.html.
-     ---------------------------------------------------------- */
-  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-
   var header = document.querySelector('.site-header');
 
   /* Sticky header state */
@@ -57,22 +49,16 @@
 
   /* ----------------------------------------------------------
      Quote-request form.
-     Works without JS (native POST to the Formspree endpoint).
-     With JS: submits via fetch, keeps the visitor on the page
-     and shows a clear success / error state.
+     Submits via fetch to /api/contact, keeps the visitor on
+     the page and displays inline status messages.
      ---------------------------------------------------------- */
   var form = document.getElementById('quote-form');
   if (form) {
-    var statusEl = document.getElementById('form-status');
+    var statusMsg = document.getElementById('form-status-msg');
     var submitBtn = form.querySelector('button[type="submit"]');
     var originalLabel = submitBtn ? submitBtn.textContent : '';
 
     form.addEventListener('submit', function (e) {
-      if (!window.fetch || !FORMSPREE_ENDPOINT || FORMSPREE_ENDPOINT.indexOf('YOUR_FORM_ID') !== -1) {
-        /* No endpoint configured yet — fall back to the native
-           action so the form still works once the real URL is set. */
-        return; // let the browser POST to the form's action
-      }
       e.preventDefault();
 
       /* native constraint validation first */
@@ -94,31 +80,54 @@
         submitBtn.textContent = 'Sending\u2026';
       }
 
-      var data = new FormData(form);
+      if (statusMsg) {
+        statusMsg.textContent = 'Sending...';
+        statusMsg.className = 'form-status-msg form-status-msg--info';
+      }
 
-      fetch(FORMSPREE_ENDPOINT, {
+      var formData = new FormData(form);
+      var payload = {
+        name: formData.get('name') || '',
+        phone: formData.get('phone') || '',
+        email: formData.get('email') || '',
+        service: formData.get('service') || '',
+        message: formData.get('message') || ''
+      };
+
+      fetch('/api/contact', {
         method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
       })
         .then(function (res) {
-          if (res.ok) return res.json();
-          return Promise.reject(new Error('Formspree returned ' + res.status));
+          return res.json().then(function (data) {
+            if (!res.ok) {
+              throw new Error((data && data.error) ? data.error : 'HTTP ' + res.status);
+            }
+            return data;
+          });
         })
         .then(function () {
-          form.style.display = 'none';
-          if (statusEl) {
-            statusEl.hidden = false;
-            statusEl.classList.add('form-done');
+          if (statusMsg) {
+            statusMsg.textContent = "Thanks, we'll be in touch shortly";
+            statusMsg.className = 'form-status-msg form-status-msg--success';
           }
+          form.reset();
         })
         .catch(function () {
+          if (statusMsg) {
+            statusMsg.textContent = 'Something went wrong, please try again';
+            statusMsg.className = 'form-status-msg form-status-msg--error';
+          }
+        })
+        .finally(function () {
           if (submitBtn) {
             submitBtn.disabled = false;
             submitBtn.textContent = originalLabel;
           }
-          var err = document.getElementById('form-error');
-          if (err) err.classList.add('form-error--show');
         });
     });
   }

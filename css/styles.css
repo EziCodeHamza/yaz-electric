@@ -871,6 +871,10 @@ p { max-width: 70ch; }
 .form-stack { display: grid; gap: var(--s4); }
 .form-error { display: none; font-size: 0.9rem; color: var(--danger); }
 .form-error--show { display: block; }
+.form-status-msg { display: none; font-size: 0.925rem; font-weight: 500; padding: 12px 16px; border-radius: var(--radius-md); }
+.form-status-msg--info { display: block; background: var(--paper); color: var(--fg); border: 1px solid var(--line); }
+.form-status-msg--success { display: block; background: rgba(22, 163, 74, 0.1); color: #15803d; border: 1px solid rgba(22, 163, 74, 0.25); }
+.form-status-msg--error { display: block; background: rgba(220, 38, 38, 0.1); color: var(--danger); border: 1px solid rgba(220, 38, 38, 0.25); }
 .split--contact { align-items: start; }
 @media (min-width: 980px) {
   .split--contact { grid-template-columns: 0.92fr 1.08fr; }
