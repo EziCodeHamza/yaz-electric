@@ -284,6 +284,18 @@ p { max-width: 70ch; }
   color: var(--ink-fg); text-decoration: none; font-weight: 650; font-size: 0.95rem;
 }
 .header-tel:hover { color: var(--amber); }
+.header-email {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--ink-fg); text-decoration: none; font-weight: 500; font-size: 0.875rem;
+  transition: color 0.15s ease;
+}
+.header-email:hover { color: var(--amber); }
+.footer__email {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--ink-fg); text-decoration: none; font-weight: 500; font-size: 0.925rem;
+  transition: color 0.15s ease;
+}
+.footer__email:hover { color: var(--amber); }
 
 /* hamburger */
 .nav-toggle {
@@ -310,7 +322,7 @@ p { max-width: 70ch; }
 /* mobile nav panel */
 .site-nav { display: contents; }
 @media (max-width: 979px) {
-  .header-tel { display: none; }
+  .header-tel, .header-email { display: none; }
   .header-actions .btn--sm { display: none; }
   .nav-toggle { display: block; }
   .site-nav {
