@@ -8,7 +8,7 @@ step, no backend. Deploys on Vercel with zero configuration.
 
 ```
 ├── index.html          Home — hero, trust strip, services, why-us, process,
-│                       testimonials, CTA, careers teaser
+│                       work standards & capability examples, CTA, careers teaser
 ├── about.html          Mission, values, credentials & compliance
 ├── services.html       Full breakdown (domestic / commercial / testing /
 │                       emergency) + FAQ
