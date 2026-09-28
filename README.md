@@ -44,7 +44,7 @@ Everything below is a placeholder the client must replace. Each is marked with a
 | What | Where | Example |
 |---|---|---|
 | **Phone number** | All HTML files (search `234 5678`) | `01 234 5678` → real number, both display text and `tel:+353…` |
-| **Email addresses** | All HTML files (search `yazelectrical.ie`) | `info@yazelectrical.ie`, `careers@yazelectrical.ie` |
+| **Email addresses** | All HTML files (search `yazelectrical.ie`) | `info@yazelectrical.ie` |
 | **Resend API Key** | Vercel Project Settings → Environment Variables | Set `RESEND_API_KEY` to your Resend API key |
 | **Domain** | `rel="canonical"`, Open Graph URLs, JSON-LD schema, `sitemap.xml`, `robots.txt` (search `yazelectrical.ie` / `UPDATE DOMAIN`) | `https://www.yazelectrical.ie` → real domain |
 | **Safe Electric number** | Optional — add the registration number to the About page / footer when known | — |
